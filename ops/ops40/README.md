@@ -6,9 +6,37 @@ In this session, we will see how continuous delivery pipelines have helped Tailw
 
 ## Demo environment deployment
 
+The following deployment produces the Tailwind application + and Azure DevOps instance for the OPS40 demos. You need two of these deployment for OPS40, one pre-production and the other a production environment.
+
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fignite-learning-paths%2Fmaster%2Fops%2Fdeployment%2Fazuredeploy.json" target="_blank">
  <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
+
+Once completed, fork the following repo to your own GitHub account.
+
+https://github.com/microsoft/TailwindTraders-Backend
+
+Clone the repo to your development system and add the [azure-pipelines.yml](demos/azure_pipeline/azure-pipelines.yml) file to the `/Source/Services/Tailwind.Traders.Cart.Api` directory.
+
+Update the `azure-pipeline.yml' file with the appropritae variabel values (AKS cluster and ACR Registry). To find the AKS values run:
+
+```
+az aks list -o table
+```
+
+To find the ingress value, once connected to the AKS cluster, run:
+
+```
+kubectl get ingress
+```
+
+To find the ACR values run:
+
+```
+az acr list -o table
+```
+
+Finally, run the pipeline to validate functionality
 
 ## Delivery assets
 
@@ -161,7 +189,7 @@ In this demo, an Azure Resource Manager template is examined, updated, and deplo
 
 A simple template named `simple-tempalte.json` can be found under the demos directory. Take a quick walk through the template, highlighting these items.
 
-- The four sections of the tempalte [(paramaters, variabls, resources, and outputs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-authoring-templates)
+- The four sections of the template [(parameters, variables, resources, and outputs](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-authoring-templates)
 
 ### Deploy more complex template
 
@@ -177,10 +205,6 @@ az group deployment create --resource-group tailwind-production --template-file 
 
 Open up the Azure portal and show that the deployment is occurring and that the only affected resource is the storage account being added.
 
-## Demo 3 - Azure Resource Change API
-
-TODO
-
 ## Teardown instructions
 
 When done the demo environment can be deleted using the following command:
@@ -193,8 +217,8 @@ az group delete --name <resource group name> --yes --no-wait
 
 Here is a list of related training and documentation.
 
-- [Design for availability and recoverability in Azure](https://docs.microsoft.com/en-us/learn/modules/design-for-availability-and-recoverability-in-azure/)
-- [Create a build pipeline](https://docs.microsoft.com/en-us/learn/modules/create-a-build-pipeline/)
+- [Design for availability and recoverability in Azure](https://docs.microsoft.com/en-us/learn/modules/design-for-availability-and-recoverability-in-azure/?WT_mc_id=msignitethetour2019-slides-ops40)
+- [Create a build pipeline](https://docs.microsoft.com/en-us/learn/modules/create-a-build-pipeline/?WT_mc_id=msignitethetour2019-slides-ops40)
 
 ## Feedback loop
 

@@ -15,7 +15,6 @@ containerVersion=v2
 # Tailwind deployment
 tailwindInfrastructure=TailwindTraders-Backend/Deploy/deployment.json
 tailwindCharts=TailwindTraders-Backend/Deploy/helm
-# tailwindChartValuesScript=tailwind-reference-deployment/deployment-artifacts-aks/helm-values/generate-config.ps1
 tailwindChartValuesScript=ignite-learning-paths/ops/deployment/helm-values/generate-config.ps1
 tailwindChartValues=/values.yaml
 tailwindWebImages=TailwindTraders-Backend/Deploy/tt-images
@@ -97,7 +96,7 @@ helm install --name web -f TailwindTraders-Website/Deploy/helm/gvalues.yaml --se
 # Copy website images to storage
 printf "\n***Copying application images (graphics) to Azure storage.***\n"
 
-STORAGE=$(az storage account list -g $azureResourceGroup -o table --query  [].name -o tsv)
+STORAGE=$(az storage account list -g $azureResourceGroup -o table --query [].name -o tsv)
 BLOB_ENDPOINT=$(az storage account list -g $azureResourceGroup --query [].primaryEndpoints.blob -o tsv)
 CONNECTION_STRING=$(az storage account show-connection-string -n $STORAGE -g $azureResourceGroup -o tsv)
 az storage container create --name "coupon-list" --public-access blob --connection-string $CONNECTION_STRING
